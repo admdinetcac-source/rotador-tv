@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Rotador Power BI</title>
+    <script>
+      const links = [
+        "https://app.powerbi.com/view?r=eyJrIjoiN2QyYTU4NTItYmRhMS00MzRkLWFmMDMtOGFjY2RjM2NjZDk4IiwidCI6IjhiNThmMjM4LWFmOGEtNDE3Ny1hM2U0LTg3YTllY2YxMGRkMyIsImMiOjR9",
+        "https://app.powerbi.com/view?r=eyJrIjoiMjdjNjU2N2ItMzkzNC00NGVjLWI0MjMtZjlkZmRhZmI0NzQ1IiwidCI6IjhiNThmMjM4LWFmOGEtNDE3Ny1hM2U0LTg3YTllY2YxMGRkMyIsImMiOjR9"
+      ];
+      let index = 0;
+      function cambiar() {
+        document.getElementById("visor").src = links[index];
+        index = (index + 1) % links.length;
+      }
+      window.onload = function() {
+        cambiar();
+        setInterval(cambiar, 15000); // cambia cada 30 segundos
+      };
+    </script>
+    <style>
+      html, body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="visor" src=""></iframe>
+  </body>
+</html>
+
+
+
+IPESA ---- 40 MAX 
+SISTEMAS ==> 
