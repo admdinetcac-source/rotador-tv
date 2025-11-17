@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rotador Power BI - TV</title>
+  <style>
+    html,body { height:100%; margin:0; background:#000; }
+    #visor { width:100%; height:100%; border:0; display:block; }
+    #controls {
+      position: fixed;
+      right: 12px;
+      bottom: 12px;
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      padding: 8px;
+      border-radius: 8px;
+      font-family: Arial, sans-serif;
+      z-index: 9999;
+      backdrop-filter: blur(4px);
+    }
+    #controls button { margin:0 4px; padding:6px 8px; border-radius:6px; border:none; cursor:pointer; }
+    #controls input[type="number"] { width:70px; margin-left:6px; }
+    #title { font-size:13px; margin-bottom:6px; display:block; }
+  </style>
+</head>
+<body>
+  <iframe id="visor" src=""></iframe>
+
+  <div id="controls" aria-hidden="false">
+    <span id="title">Rotador Power BI</span>
+    <button id="prev">⟨ Anterior</button>
+    <button id="next">Siguiente ⟩</button>
+    <button id="pause">Pausa ⏸</button>
+    <label style="margin-left:8px">Intervalo(s):
+      <input id="interval" type="number" min="5" value="30" /> s
+    </label>
+  </div>
+
+  <script>
+    // --- EDITA AQUÍ TUS LINKS ---
+    const links = [
+      "https://app.powerbi.com/view?r=eyJrIjoiN2QyYTU4NTItYmRhMS00MzRkLWFmMDMtOGFjY2RjM2NjZDk4IiwidCI6IjhiNThmMjM4LWFmOGEtNDE3Ny1hM2U0LTg3YTllY2YxMGRkMyIsImMiOjR9",
+      "https://app.powerbi.com/view?r=eyJrIjoiMjdjNjU2N2ItMzkzNC00NGVjLWI0MjMtZjlkZmRhZmI0NzQ1IiwidCI6IjhiNThmMjM4LWFmOGEtNDE3Ny1hM2U0LTg3YTllY2YxMGRkMyIsImMiOjR9"
+      // Puedes agregar más links aquí entre comillas y coma
+    ];
+    // -----------------------------
+
+    const iframe = document.getElementById('visor');
+    const btnNext = document.getElementById('next');
+    const btnPrev = document.getElementById('prev');
+    const btnPause = document.getElementById('pause');
+    const intervalInput = document.getElementById('interval');
+
+    let index = 0;
+    let timer = null;
+    let paused = false;
+
+    function showIndex(i){
+      index = (i + links.length) % links.length;
+      iframe.src = links[index];
+    }
+
+    function startTimer(){
+      stopTimer();
+      const ms = Math.max(5, Number(intervalInput.value) || 30) * 1000;
+      timer = setInterval(()=> { if(!paused) showIndex(index+1); }, ms);
+    }
+
+    function stopTimer(){ if(timer) { clearInterval(timer); timer = null; } }
+
+    btnNext.addEventListener('click', ()=>{ showIndex(index+1); });
+    btnPrev.addEventListener('click', ()=>{ showIndex(index-1); });
+    btnPause.addEventListener('click', ()=>{
+      paused = !paused;
+      btnPause.textContent = paused ? 'Reanudar ▶' : 'Pausa ⏸';
+    });
+
+    intervalInput.addEventListener('change', ()=>{ startTimer(); });
+
+    // Inicio
+    showIndex(0);
+    startTimer();
+
+    // Reload previa para evitar pantalla blanca en ciertos navegadores
+    iframe.addEventListener('load', ()=> {
+      // noop por ahora; se puede agregar lógica para mostrar spinner
+    });
+  </script>
+</body>
+</html>
