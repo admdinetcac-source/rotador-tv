@@ -27,13 +27,13 @@
 <body>
   <iframe id="visor" src=""></iframe>
 
-  <div id="controls" aria-hidden="false">
-    <span id="title">Rotador Power BI</span>
-    <button id="prev">⟨ Anterior</button>
-    <button id="next">Siguiente ⟩</button>
-    <button id="pause">Pausa ⏸</button>
-    <label style="margin-left:8px">Intervalo(s):
-      <input id="interval" type="number" min="5" value="30" /> s
+ // <div id="controls" aria-hidden="false">
+  //  <span id="title">Rotador Power BI</span>
+   // <button id="prev">⟨ Anterior</button>
+   // <button id="next">Siguiente ⟩</button>
+   // <button id="pause">Pausa ⏸</button>
+   // <label style="margin-left:8px">Intervalo(s):
+   //   <input id="interval" type="number" min="5" value="30" /> s
     </label>
   </div>
 
@@ -69,11 +69,11 @@
 
     function stopTimer(){ if(timer) { clearInterval(timer); timer = null; } }
 
-    btnNext.addEventListener('click', ()=>{ showIndex(index+1); });
-    btnPrev.addEventListener('click', ()=>{ showIndex(index-1); });
-    btnPause.addEventListener('click', ()=>{
-      paused = !paused;
-      btnPause.textContent = paused ? 'Reanudar ▶' : 'Pausa ⏸';
+   // btnNext.addEventListener('click', ()=>{ showIndex(index+1); });
+    //btnPrev.addEventListener('click', ()=>{ showIndex(index-1); });
+    //btnPause.addEventListener('click', ()=>{
+     // paused = !paused;
+      //btnPause.textContent = paused ? 'Reanudar ▶' : 'Pausa ⏸';
     });
 
     intervalInput.addEventListener('change', ()=>{ startTimer(); });
@@ -89,5 +89,6 @@
   </script>
 </body>
 </html>
+
 
 
