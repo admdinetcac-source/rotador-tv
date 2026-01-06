@@ -48,6 +48,15 @@
         showIndex(index + 1);
       }, INTERVALO_SEGUNDOS * 1000);
     }
+ /* =========================
+       ANTI-INACTIVIDAD (LG)
+       Simula actividad cada
+       10 minutos
+    ========================== */
+    setInterval(() => {
+      window.dispatchEvent(new Event("mousemove"));
+      window.dispatchEvent(new Event("keydown"));
+    }, 10 * 60 * 1000);
 
     // Iniciar
     showIndex(0);
@@ -56,6 +65,7 @@
 
 </body>
 </html>
+
 
 
 
